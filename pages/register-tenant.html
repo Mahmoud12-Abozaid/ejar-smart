@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل مستأجر | العقار الذكي</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/rtl-overrides.css">
+    <style>
+        .step-content { display: none; }
+        .step-content.active { display: block; }
+        
+        .upload-zone {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            background-color: var(--bg-color);
+        }
+        .upload-zone:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(245, 166, 35, 0.05);
+        }
+        .upload-zone input[type="file"] {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        #camera-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            background: #000;
+            position: relative;
+        }
+        #video-feed {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1);
+        }
+        #canvas-capture { display: none; }
+    </style>
+</head>
+<body class="bg-light py-5">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                
+                <div class="text-center mb-4">
+                    <a href="index.html" class="text-decoration-none">
+                        <h2 class="fw-bold text-accent mb-0"><i class="bi bi-building me-2"></i>العقار الذكي</h2>
+                    </a>
+                    <h4 class="mt-3">إنشاء حساب مستأجر جديد</h4>
+                </div>
+
+                <div class="card p-4 p-md-5 border-0 shadow-sm mb-4">
+                    <!-- Progress Bar -->
+                    <div class="position-relative mb-5">
+                        <div class="progress" style="height: 4px;">
+                            <div class="progress-bar bg-accent" id="formProgress" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="d-flex justify-content-between position-absolute top-0 w-100" style="margin-top: -12px;">
+                            <span class="bg-accent text-white rounded-circle text-center d-flex align-items-center justify-content-center step-indicator active" style="width: 28px; height: 28px;" id="indicator-1">1</span>
+                            <span class="bg-light text-secondary border rounded-circle text-center d-flex align-items-center justify-content-center step-indicator" style="width: 28px; height: 28px;" id="indicator-2">2</span>
+                            <span class="bg-light text-secondary border rounded-circle text-center d-flex align-items-center justify-content-center step-indicator" style="width: 28px; height: 28px;" id="indicator-3">3</span>
+                            <span class="bg-light text-secondary border rounded-circle text-center d-flex align-items-center justify-content-center step-indicator" style="width: 28px; height: 28px;" id="indicator-4">4</span>
+                        </div>
+                    </div>
+
+                    <form id="registerForm" data-role="tenant" novalidate>
+                        
+                        <!-- Step 1: Personal Info -->
+                        <div class="step-content active" id="step1">
+                            <h5 class="fw-bold mb-4">البيانات الشخصية</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">الاسم الرباعي</label>
+                                    <input type="text" class="form-control" id="fullName" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">رقم الهاتف المحمول</label>
+                                    <input type="tel" class="form-control" id="phone" required>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label">البريد الإلكتروني</label>
+                                    <input type="email" class="form-control" id="regEmail" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">كلمة المرور</label>
+                                    <input type="password" class="form-control" id="regPassword" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">تأكيد كلمة المرور</label>
+                                    <input type="password" class="form-control" id="regConfirmPassword" required>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end mt-4">
+                                <button type="button" class="btn btn-accent px-4 btn-next" data-next="step2">التالي <i class="bi bi-chevron-left ms-2"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Profile Photo -->
+                        <div class="step-content" id="step2">
+                            <h5 class="fw-bold mb-4">الصورة الشخصية</h5>
+                            <p class="text-secondary mb-4">يرجى رفع صورة شخصية واضحة (يجب أن تظهر ملامح الوجه بوضوح).</p>
+                            
+                            <div class="text-center mb-4">
+                                <div class="upload-zone mx-auto" style="max-width: 300px;">
+                                    <input type="file" id="profilePhoto" accept="image/*" required>
+                                    <i class="bi bi-person-bounding-box fs-1 text-accent mb-2 d-block"></i>
+                                    <span class="text-accent fw-bold d-block">اضغط أو اسحب الصورة هنا</span>
+                                </div>
+                                <div id="profilePreview" class="mt-3 d-none">
+                                    <img src="" alt="Preview" class="rounded-circle shadow-sm" style="width: 150px; height: 150px; object-fit: cover; border: 3px solid var(--accent-color);">
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="button" class="btn btn-outline-secondary px-4 btn-prev" data-prev="step1">السابق</button>
+                                <button type="button" class="btn btn-accent px-4 btn-next" data-next="step3">التالي <i class="bi bi-chevron-left ms-2"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: National ID -->
+                        <div class="step-content" id="step3">
+                            <h5 class="fw-bold mb-4">بطاقة الرقم القومي</h5>
+                            <p class="text-secondary mb-4">لضمان أمان المنصة، يرجى رفع صورة واضحة لوجهي بطاقة الرقم القومي.</p>
+                            
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">الوجه الأمامي للبطاقة</label>
+                                    <div class="upload-zone">
+                                        <input type="file" id="idFront" accept="image/*" required>
+                                        <i class="bi bi-credit-card-2-front fs-1 text-accent mb-2 d-block"></i>
+                                        <span class="text-accent">ارفع الصورة</span>
+                                    </div>
+                                    <div id="idFrontPreview" class="mt-2 d-none">
+                                        <img src="" class="img-fluid rounded shadow-sm w-100" style="max-height: 150px; object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">الوجه الخلفي للبطاقة</label>
+                                    <div class="upload-zone">
+                                        <input type="file" id="idBack" accept="image/*" required>
+                                        <i class="bi bi-credit-card-2-back fs-1 text-accent mb-2 d-block"></i>
+                                        <span class="text-accent">ارفع الصورة</span>
+                                    </div>
+                                    <div id="idBackPreview" class="mt-2 d-none">
+                                        <img src="" class="img-fluid rounded shadow-sm w-100" style="max-height: 150px; object-fit: cover;">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="button" class="btn btn-outline-secondary px-4 btn-prev" data-prev="step2">السابق</button>
+                                <button type="button" class="btn btn-accent px-4 btn-next" data-next="step4">التالي <i class="bi bi-chevron-left ms-2"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Live Selfie -->
+                        <div class="step-content" id="step4">
+                            <h5 class="fw-bold mb-4">التحقق المباشر (Selfie)</h5>
+                            <p class="text-secondary mb-4 text-center">انظر للكاميرا والتقط صورة لتأكيد هويتك ومطابقتها مع البطاقة.</p>
+                            
+                            <div class="text-center">
+                                <div id="camera-container" class="mb-3 border border-4 border-accent shadow">
+                                    <video id="video-feed" autoplay playsinline></video>
+                                    <img id="selfie-result" class="d-none" style="width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1);">
+                                </div>
+                                <canvas id="canvas-capture" width="400" height="400"></canvas>
+                                
+                                <div class="mb-4">
+                                    <button type="button" id="btn-start-camera" class="btn btn-outline-accent me-2" style="color: var(--accent-color); border-color: var(--accent-color);"><i class="bi bi-camera-video"></i> فتح الكاميرا</button>
+                                    <button type="button" id="btn-capture" class="btn btn-accent text-white d-none"><i class="bi bi-camera"></i> التقاط</button>
+                                    <button type="button" id="btn-retake" class="btn btn-outline-secondary d-none"><i class="bi bi-arrow-counterclockwise"></i> إعادة</button>
+                                </div>
+                                <input type="hidden" id="selfieData" required>
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-4 border-top pt-4">
+                                <button type="button" class="btn btn-outline-secondary px-4 btn-prev" data-prev="step3" id="final-prev-btn">السابق</button>
+                                <button type="submit" class="btn btn-success px-5 btn-lg" id="submitRegBtn">
+                                    <span class="spinner-border spinner-border-sm d-none me-2" role="status" aria-hidden="true" id="regSpinner"></span>
+                                    إتمام التسجيل
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                
+                <div class="text-center mt-3">
+                    <span class="text-secondary">لديك حساب بالفعل؟ </span>
+                    <a href="login.html" class="text-decoration-none fw-bold text-accent">تسجيل الدخول</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script type="module" src="../assets/js/utils.js"></script>
+    <script type="module" src="../assets/js/auth.js"></script>
+</body>
+</html>

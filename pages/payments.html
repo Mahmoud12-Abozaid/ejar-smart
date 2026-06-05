@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المدفوعات | العقار الذكي</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/rtl-overrides.css">
+</head>
+<body class="bg-light pb-5">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top mb-4">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="dashboard-tenant.html">
+                <i class="bi bi-building me-2 text-accent"></i> العقار الذكي
+            </a>
+            <div class="d-flex ms-auto gap-2">
+                <a href="dashboard-tenant.html" class="btn btn-outline-secondary btn-sm">العودة للوحة التحكم</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+            <div>
+                <h3 class="fw-bold mb-1">المدفوعات</h3>
+                <p class="text-secondary mb-0">سجل المدفوعات السابقة والالتزامات القادمة.</p>
+            </div>
+            <div>
+                <button class="btn btn-warning fw-bold px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                    <i class="bi bi-credit-card me-2"></i> ادفع الآن
+                </button>
+            </div>
+        </div>
+
+        <!-- Next Payment Card -->
+        <div class="card border-warning border-2 shadow-sm p-4 mb-4 bg-white position-relative overflow-hidden">
+            <div class="position-absolute top-0 start-0 w-100 bg-warning" style="height: 4px;"></div>
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <span class="badge bg-warning text-dark mb-2">استحقاق قادم</span>
+                    <h5 class="fw-bold mb-1">إيجار شهر نوفمبر - شقة التجمع الخامس</h5>
+                    <p class="text-secondary mb-0">تاريخ الاستحقاق: ٠١ نوفمبر ٢٠٢٦</p>
+                </div>
+                <div class="text-end">
+                    <h3 class="fw-bold text-dark mb-0">١٥,٠٠٠ ج.م</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Table -->
+        <div class="card border-0 shadow-sm p-4">
+            <h5 class="fw-bold mb-4">سجل المدفوعات السابقة</h5>
+            
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>رقم العملية</th>
+                            <th>التاريخ</th>
+                            <th>البيان</th>
+                            <th>المبلغ</th>
+                            <th>الحالة</th>
+                            <th>الإيصال</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-secondary">#PAY-98213</td>
+                            <td>٠١ أكتوبر ٢٠٢٦</td>
+                            <td>إيجار شهر أكتوبر - شقة التجمع</td>
+                            <td class="fw-bold">١٥,٠٠٠ ج.م</td>
+                            <td><span class="badge badge-success px-2 py-1"><i class="bi bi-check-circle me-1"></i> مكتمل</span></td>
+                            <td><button class="btn btn-sm btn-outline-secondary" onclick="utils.showToast('جاري تحميل الإيصال...', 'info')"><i class="bi bi-download"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td class="text-secondary">#PAY-87102</td>
+                            <td>٠١ سبتمبر ٢٠٢٦</td>
+                            <td>إيجار شهر سبتمبر - شقة التجمع</td>
+                            <td class="fw-bold">١٥,٠٠٠ ج.م</td>
+                            <td><span class="badge badge-success px-2 py-1"><i class="bi bi-check-circle me-1"></i> مكتمل</span></td>
+                            <td><button class="btn btn-sm btn-outline-secondary" onclick="utils.showToast('جاري تحميل الإيصال...', 'info')"><i class="bi bi-download"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td class="text-secondary">#PAY-76541</td>
+                            <td>٠١ أغسطس ٢٠٢٦</td>
+                            <td>إيجار شهر أغسطس - شقة التجمع</td>
+                            <td class="fw-bold">١٥,٠٠٠ ج.م</td>
+                            <td><span class="badge badge-success px-2 py-1"><i class="bi bi-check-circle me-1"></i> مكتمل</span></td>
+                            <td><button class="btn btn-sm btn-outline-secondary" onclick="utils.showToast('جاري تحميل الإيصال...', 'info')"><i class="bi bi-download"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <h5 class="modal-title fw-bold text-dark"><i class="bi bi-shield-lock text-success me-2"></i> دفع آمن</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModalBtn"></button>
+                </div>
+                
+                <div id="paymentSuccessState" class="d-none p-5 text-center">
+                    <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+                    <h4 class="fw-bold text-success mt-3 mb-2">تم الدفع بنجاح!</h4>
+                    <p class="text-secondary mb-0">تم تحصيل الإيجار وإرسال الإيصال إلى بريدك الإلكتروني.</p>
+                </div>
+
+                <form id="paymentForm" novalidate>
+                    <div class="modal-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                            <span class="text-secondary">المبلغ الإجمالي</span>
+                            <h3 class="fw-bold text-accent mb-0">١٥,٠٠٠ ج.م</h3>
+                        </div>
+
+                        <div class="mb-4 text-center">
+                            <div class="d-flex justify-content-center gap-2 mb-2">
+                                <i class="bi bi-credit-card-fill fs-3 text-secondary"></i>
+                            </div>
+                            <span class="small text-secondary">ندعم جميع البطاقات الائتمانية</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-secondary">الاسم على البطاقة</label>
+                            <input type="text" class="form-control" id="cardName" required placeholder="مثال: SAID KAMEL">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-secondary">رقم البطاقة</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="bi bi-credit-card text-secondary"></i></span>
+                                <input type="text" class="form-control" id="cardNumber" required placeholder="0000 0000 0000 0000" dir="ltr">
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-6">
+                                <label class="form-label fw-bold small text-secondary">تاريخ الانتهاء (MM/YY)</label>
+                                <input type="text" class="form-control text-center" id="cardExpiry" required placeholder="MM/YY" dir="ltr">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-bold small text-secondary">CVV</label>
+                                <input type="text" class="form-control text-center" id="cardCvv" required placeholder="123" dir="ltr">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light p-3">
+                        <button type="submit" class="btn btn-warning fw-bold w-100 py-2 shadow-sm" id="submitPaymentBtn">
+                            <span class="spinner-border spinner-border-sm d-none me-2" id="paymentSpinner"></span>
+                            تأكيد الدفع (١٥,٠٠٠ ج.م)
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    
+    <script type="module" src="../assets/js/utils.js"></script>
+    <script type="module" src="../assets/js/payments.js"></script>
+</body>
+</html>

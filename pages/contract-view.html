@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>توقيع العقد | العقار الذكي</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Amiri:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/rtl-overrides.css">
+    
+    <style>
+        .contract-paper {
+            background: #fff;
+            padding: 3rem;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            font-family: 'Amiri', serif; /* Formal font for contracts */
+            color: #000;
+            line-height: 2;
+        }
+        .contract-title {
+            text-align: center;
+            font-weight: 700;
+            border-bottom: 2px solid #000;
+            display: inline-block;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+        }
+        .signature-pad {
+            border: 2px dashed var(--primary-color);
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            cursor: crosshair;
+            width: 100%;
+            height: 200px;
+        }
+        
+        /* Media query for printing */
+        @media print {
+            body { background: #fff; padding: 0; }
+            .navbar, .btn, .signature-section { display: none !important; }
+            .contract-paper { box-shadow: none; border: none; padding: 0; }
+        }
+    </style>
+</head>
+<body class="bg-light pb-5">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top mb-4">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="bi bi-building me-2 text-primary"></i> العقار الذكي
+            </a>
+            <div class="d-flex ms-auto gap-2">
+                <button class="btn btn-outline-secondary btn-sm" onclick="window.print()"><i class="bi bi-printer"></i> طباعة</button>
+                <a href="dashboard-tenant.html" class="btn btn-outline-secondary btn-sm">العودة</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                
+                <!-- Success State (Hidden initially) -->
+                <div id="successCard" class="card border-0 shadow-sm p-5 text-center d-none mb-4 bg-success bg-opacity-10">
+                    <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+                    <h3 class="fw-bold text-success mt-3 mb-2">تم توقيع العقد بنجاح!</h3>
+                    <p class="text-secondary mb-4">تم حفظ نسختك الموقعة وتوثيقها بتقنية التشفير الآمنة. تم إرسال نسخة إلى بريدك الإلكتروني.</p>
+                    <div>
+                        <button class="btn btn-primary" onclick="window.print()"><i class="bi bi-download me-2"></i> تحميل العقد (PDF)</button>
+                        <a href="dashboard-tenant.html" class="btn btn-outline-primary ms-2">العودة للوحة التحكم</a>
+                    </div>
+                </div>
+
+                <!-- Contract Paper -->
+                <div id="contractContent" class="contract-paper mb-4">
+                    <div class="text-center">
+                        <h2 class="contract-title">عقد إيجار أملاك</h2>
+                    </div>
+                    
+                    <p>إنه في يوم <strong id="cDate">الخميس الموافق ٣٠ أبريل ٢٠٢٦</strong>، تم الاتفاق والتراضي بين كل من:</p>
+                    
+                    <p>
+                        <strong>أولاً:</strong> السيد/ <span id="cOwnerName" class="text-decoration-underline px-2">أحمد محمود</span><br>
+                        المقيم في: <span id="cOwnerAddress">القاهرة</span><br>
+                        ويحمل بطاقة رقم قومي: <span id="cOwnerId">٢٩٠١٢٣٤٥٦٧٨٩٠١</span>
+                        <br><strong class="ms-3">(طرف أول - مؤجر)</strong>
+                    </p>
+                    
+                    <p>
+                        <strong>ثانياً:</strong> السيد/ <span id="cTenantName" class="text-decoration-underline px-2">سعيد كامل</span><br>
+                        المقيم في: <span id="cTenantAddress">الإسكندرية</span><br>
+                        ويحمل بطاقة رقم قومي: <span id="cTenantId">٢٩٥٠٩٨٧٦٥٤٣٢١٠</span>
+                        <br><strong class="ms-3">(طرف ثان - مستأجر)</strong>
+                    </p>
+                    
+                    <h5 class="fw-bold mt-4 mb-3 text-center">البند الأول: موضوع العقد</h5>
+                    <p>
+                        أجر الطرف الأول للطرف الثاني <span id="cPropType">شقة سكنية</span> الكائنة في <span id="cPropAddress">التجمع الخامس، القاهرة</span>، وذلك بقصد استعمالها كسكن خاص.
+                    </p>
+                    
+                    <h5 class="fw-bold mt-4 mb-3 text-center">البند الثاني: مدة الإيجار</h5>
+                    <p>
+                        مدة هذا العقد هي <span id="cDuration">سنة واحدة</span> تبدأ من تاريخ <span id="cStartDate">٠١ مايو ٢٠٢٦</span> وتنتهي في <span id="cEndDate">٣٠ أبريل ٢٠٢٧</span>، غير قابلة للتجديد إلا بعقد جديد.
+                    </p>
+                    
+                    <h5 class="fw-bold mt-4 mb-3 text-center">البند الثالث: القيمة الإيجارية</h5>
+                    <p>
+                        تم الاتفاق على أن القيمة الإيجارية الشهرية هي <span id="cRentAmount">١٥,٠٠٠ ج.م</span> (فقط خمسة عشر ألف جنيهاً لا غير)، تدفع مقدماً في اليوم الأول من كل شهر ميلادي إلكترونياً عبر منصة العقار الذكي. كما دفع الطرف الثاني مبلغ <span id="cDeposit">٣٠,٠٠٠ ج.م</span> كتأمين يرد في نهاية المدة.
+                    </p>
+
+                    <p class="mt-5 text-center">بما ذكر تحرر هذا العقد وتم التوقيع عليه إلكترونياً ليكون حجة بين الطرفين.</p>
+
+                    <div class="row mt-5 text-center pt-5">
+                        <div class="col-6">
+                            <p class="fw-bold">توقيع الطرف الأول (المؤجر)</p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/John_Hancock_Signature.svg" width="150" alt="توقيع المؤجر" style="opacity: 0.7;">
+                        </div>
+                        <div class="col-6">
+                            <p class="fw-bold">توقيع الطرف الثاني (المستأجر)</p>
+                            <div id="tenantSignaturePlaceholder" class="text-secondary fst-italic">بانتظار التوقيع...</div>
+                            <img id="tenantSignatureImg" src="" class="d-none mx-auto" width="150" alt="توقيع المستأجر">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Signature Section -->
+                <div id="signatureSection" class="card border-0 shadow-sm p-4 signature-section">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-pen me-2"></i> التوقيع الإلكتروني</h5>
+                    <p class="text-secondary small mb-3">يرجى رسم توقيعك في المربع أدناه باستخدام الماوس أو اللمس. هذا التوقيع ملزم قانونياً بموجب شروط وأحكام المنصة.</p>
+                    
+                    <canvas id="signaturePad" class="signature-pad mb-3" width="600" height="200"></canvas>
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button class="btn btn-outline-danger" id="clearSignature"><i class="bi bi-eraser me-1"></i> امسح التوقيع</button>
+                        <button class="btn btn-success px-5" id="confirmSignature">
+                            <span class="spinner-border spinner-border-sm d-none me-2" id="signSpinner"></span>
+                            تأكيد التوقيع
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script type="module" src="../assets/js/utils.js"></script>
+    <script type="module" src="../assets/js/contracts.js"></script>
+</body>
+</html>

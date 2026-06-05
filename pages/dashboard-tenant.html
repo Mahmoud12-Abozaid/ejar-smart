@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم المستأجر | العقار الذكي</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/rtl-overrides.css">
+    
+    <style>
+        .dashboard-container { display: flex; min-height: 100vh; }
+        .sidebar { width: 280px; flex-shrink: 0; padding-top: 2rem; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+        .main-content { flex-grow: 1; padding: 2rem; background-color: var(--bg-color); min-width: 0; }
+        
+        .stat-card { transition: transform 0.2s; }
+        .stat-card:hover { transform: translateY(-5px); }
+        
+        @media (max-width: 991px) {
+            .dashboard-container { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: static; padding: 1rem; border-left: none; border-bottom: 1px solid var(--border-color); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navbar (Mobile only toggle) -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm d-lg-none px-3">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <i class="bi bi-building me-2 text-accent"></i> العقار الذكي
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <div class="dashboard-container">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar bg-white border-start collapse d-lg-block" id="sidebarMenu">
+            <div class="px-4 mb-4 d-none d-lg-block">
+                <a href="index.html" class="text-decoration-none d-flex align-items-center">
+                    <i class="bi bi-building me-2 text-accent fs-4"></i>
+                    <h5 class="fw-bold text-accent mb-0">العقار الذكي</h5>
+                </a>
+            </div>
+            
+            <div class="px-4 mb-4 text-center border-bottom pb-4">
+                <img src="https://ui-avatars.com/api/?name=سعيد+كامل&background=f5a623&color=fff" class="rounded-circle mb-2" width="60" alt="Avatar">
+                <h6 class="fw-bold mb-0">سعيد كامل</h6>
+                <small class="text-secondary">مستأجر</small>
+            </div>
+
+            <nav class="nav flex-column px-3 gap-1">
+                <a class="nav-link active" href="dashboard-tenant.html" style="color: var(--accent-color) !important;">
+                    <i class="bi bi-grid sidebar-link-icon"></i> لوحة التحكم
+                </a>
+                <a class="nav-link text-secondary" href="property-listing.html">
+                    <i class="bi bi-search sidebar-link-icon"></i> البحث عن عقار
+                </a>
+                <a class="nav-link text-secondary" href="contract-view.html">
+                    <i class="bi bi-file-earmark-text sidebar-link-icon"></i> العقود
+                </a>
+                <a class="nav-link text-secondary" href="payments.html">
+                    <i class="bi bi-credit-card sidebar-link-icon"></i> المدفوعات
+                </a>
+                <a class="nav-link text-secondary" href="notifications.html">
+                    <i class="bi bi-bell sidebar-link-icon"></i> الإشعارات
+                </a>
+                <hr class="my-2 border-secondary opacity-25">
+                <a class="nav-link text-secondary" href="#">
+                    <i class="bi bi-gear sidebar-link-icon"></i> الإعدادات
+                </a>
+                <a class="nav-link text-danger mt-3" href="login.html">
+                    <i class="bi bi-box-arrow-right sidebar-link-icon"></i> تسجيل الخروج
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+                <div>
+                    <h3 class="fw-bold mb-1">مرحباً، سعيد 👋</h3>
+                    <p class="text-secondary mb-0">نظرة عامة على عقاراتك المستأجرة.</p>
+                </div>
+            </div>
+
+            <!-- Payment Due Banner -->
+            <div class="alert alert-warning alert-dismissible fade show border-0 shadow-sm d-flex align-items-center mb-5" role="alert">
+                <i class="bi bi-exclamation-triangle-fill fs-3 text-warning me-3"></i>
+                <div>
+                    <h6 class="fw-bold mb-1">تذكير بدفع الإيجار</h6>
+                    <p class="mb-0 small">يستحق إيجار شهر نوفمبر لشقة التجمع الخامس (١٥,٠٠٠ ج.م) بعد ٥ أيام. يرجى الدفع لتجنب غرامات التأخير.</p>
+                </div>
+                <div class="ms-auto d-none d-md-block">
+                    <a href="payments.html" class="btn btn-sm btn-warning fw-bold">ادفع الآن</a>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <div class="row g-4">
+                <!-- Active Contract Card -->
+                <div class="col-xl-7">
+                    <div class="card border-0 shadow-sm p-4 h-100 position-relative overflow-hidden">
+                        <!-- Accent Top Border -->
+                        <div class="position-absolute top-0 start-0 w-100 bg-accent" style="height: 4px;"></div>
+                        
+                        <h5 class="fw-bold mb-4">العقار الحالي المستأجر</h5>
+                        
+                        <div class="d-flex flex-column flex-md-row gap-4 mb-4">
+                            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=300" class="rounded" style="width: 150px; height: 100px; object-fit: cover;" alt="Property">
+                            <div class="flex-grow-1">
+                                <h5 class="fw-bold text-primary mb-1">شقة فاخرة للإيجار</h5>
+                                <p class="text-secondary small mb-2"><i class="bi bi-geo-alt-fill text-accent"></i> التجمع الخامس، القاهرة</p>
+                                <h4 class="fw-bold text-accent mb-0">١٥,٠٠٠ ج.م <span class="fs-6 fw-normal text-secondary">/ شهرياً</span></h4>
+                            </div>
+                        </div>
+
+                        <!-- Contract Expiry Progress -->
+                        <div class="bg-light p-3 rounded mt-auto">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="fw-bold small">مدة العقد المتبقية</span>
+                                <span class="fw-bold small text-primary">٤٥ يوماً</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2 text-secondary small">
+                                <span>تاريخ البدء: ١٥ نوفمبر ٢٠٢٥</span>
+                                <span>تاريخ الانتهاء: ١٤ نوفمبر ٢٠٢٦</span>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex gap-2 mt-4">
+                            <a href="contract-view.html" class="btn btn-outline-primary flex-grow-1"><i class="bi bi-file-pdf me-2"></i> عرض العقد</a>
+                            <button class="btn btn-outline-secondary" onclick="utils.showToast('تم إرسال طلب الصيانة للمالك', 'success')"><i class="bi bi-tools me-2"></i> طلب صيانة</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saved Properties (Wishlist) -->
+                <div class="col-xl-5">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0">العقارات المحفوظة</h5>
+                            <a href="property-listing.html" class="text-decoration-none small">عرض الكل</a>
+                        </div>
+
+                        <div class="d-flex flex-column gap-3">
+                            <!-- Saved Property Item -->
+                            <div class="d-flex gap-3 align-items-center border rounded p-2 position-relative hover-bg">
+                                <button class="btn btn-link text-danger position-absolute top-0 end-0 p-2" title="إزالة"><i class="bi bi-heart-fill"></i></button>
+                                <img src="https://images.unsplash.com/photo-1502672260266-1c1e52d15461?auto=format&fit=crop&w=150" class="rounded" style="width: 80px; height: 80px; object-fit: cover;" alt="Property">
+                                <div>
+                                    <h6 class="fw-bold mb-1 fs-6">شقة سموحة (إطلالة بحر)</h6>
+                                    <p class="text-secondary small mb-1"><i class="bi bi-geo-alt"></i> الإسكندرية</p>
+                                    <span class="fw-bold text-accent small">١٢,٠٠٠ ج.م</span>
+                                </div>
+                            </div>
+                            <!-- Saved Property Item -->
+                            <div class="d-flex gap-3 align-items-center border rounded p-2 position-relative hover-bg">
+                                <button class="btn btn-link text-danger position-absolute top-0 end-0 p-2" title="إزالة"><i class="bi bi-heart-fill"></i></button>
+                                <img src="https://images.unsplash.com/photo-1536376072261-38c75010e6c9?auto=format&fit=crop&w=150" class="rounded" style="width: 80px; height: 80px; object-fit: cover;" alt="Property">
+                                <div>
+                                    <h6 class="fw-bold mb-1 fs-6">ستوديو مفروش</h6>
+                                    <p class="text-secondary small mb-1"><i class="bi bi-geo-alt"></i> المهندسين، الجيزة</p>
+                                    <span class="fw-bold text-accent small">٨,٠٠٠ ج.م</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="property-listing.html" class="btn btn-outline-accent w-100 mt-auto pt-3">
+                            <i class="bi bi-search me-2"></i> استكشاف المزيد من العقارات
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script type="module" src="../assets/js/utils.js"></script>
+    <script type="module">
+        // Basic interactive logic for the dashboard
+        import { showToast } from '../assets/js/utils.js';
+
+        $(document).ready(function() {
+            $('.bi-heart-fill').parent().on('click', function(e) {
+                e.preventDefault();
+                $(this).closest('.d-flex').fadeOut(300, function() {
+                    $(this).remove();
+                });
+                showToast('تم إزالة العقار من المفضلة', 'info');
+            });
+        });
+    </script>
+</body>
+</html>

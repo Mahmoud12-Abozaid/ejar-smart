@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egar Smart | العقار الذكي - المنصة الأولى للإيجار</title>
+    
+    <!-- CDN Dependencies -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/rtl-overrides.css">
+</head>
+<body>
+
+    <!-- Sticky Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="bi bi-building me-2 text-primary"></i>
+                العقار الذكي
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">المميزات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">كيف تعمل</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-link text-decoration-none text-secondary" id="theme-toggle">
+                        <i class="bi bi-moon-fill"></i>
+                    </button>
+                    <a href="login.html" class="btn btn-outline-primary px-4">تسجيل الدخول</a>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle px-4" type="button" data-bs-toggle="dropdown">
+                            إنشاء حساب
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="register-owner.html">أنا مالك عقار</a></li>
+                            <li><a class="dropdown-item" href="register-tenant.html">أنا مستأجر</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="py-5 bg-white text-center shadow-sm">
+        <div class="container py-5">
+            <h1 class="display-4 fw-bold text-primary mb-4">أسهل طريقة لتأجير عقارك إلكترونياً</h1>
+            <p class="lead text-secondary mb-5 w-75 mx-auto">
+                منصة "العقار الذكي" تجمع بين الملاك والمستأجرين في بيئة رقمية آمنة. وقع عقودك إلكترونياً، وادفع الإيجار بضغطة زر، وتمتع براحة البال.
+            </p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="register-owner.html" class="btn btn-primary btn-lg px-5 py-3">
+                    <i class="bi bi-house-add me-2"></i> أنا مالك
+                </a>
+                <a href="register-tenant.html" class="btn btn-accent btn-lg px-5 py-3">
+                    <i class="bi bi-search me-2"></i> أنا مستأجر
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-primary">لماذا تختار العقار الذكي؟</h2>
+                <p class="text-secondary">كل ما تحتاجه لإدارة عقاراتك في مكان واحد</p>
+            </div>
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 border-0 text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-file-earmark-text text-accent fs-1"></i>
+                        </div>
+                        <h4 class="fw-bold">عقود إلكترونية</h4>
+                        <p class="text-secondary mb-0">إنشاء وتوثيق عقود الإيجار إلكترونياً بسهولة تامة.</p>
+                    </div>
+                </div>
+                <!-- Feature 2 -->
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 border-0 text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-credit-card text-primary fs-1"></i>
+                        </div>
+                        <h4 class="fw-bold">دفع آمن</h4>
+                        <p class="text-secondary mb-0">بوابات دفع إلكترونية متعددة وآمنة لاستلام الإيجار.</p>
+                    </div>
+                </div>
+                <!-- Feature 3 -->
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 border-0 text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-pen text-accent fs-1"></i>
+                        </div>
+                        <h4 class="fw-bold">توقيع رقمي</h4>
+                        <p class="text-secondary mb-0">وقع عقودك عبر منصتنا بأمان واعتمادية.</p>
+                    </div>
+                </div>
+                <!-- Feature 4 -->
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 border-0 text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-bell text-primary fs-1"></i>
+                        </div>
+                        <h4 class="fw-bold">إشعارات ذكية</h4>
+                        <p class="text-secondary mb-0">تنبيهات فورية بمواعيد الدفع وتجديد العقود.</p>
+                    </div>
+                </div>
+                <!-- Feature 5 -->
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 border-0 text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-shield-check text-accent fs-1"></i>
+                        </div>
+                        <h4 class="fw-bold">معاملات موثقة</h4>
+                        <p class="text-secondary mb-0">جميع المعاملات محفوظة ومشفرة لضمان حقوقك.</p>
+                    </div>
+                </div>
+                <!-- Feature 6 -->
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 border-0 text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-person-badge text-primary fs-1"></i>
+                        </div>
+                        <h4 class="fw-bold">تحقق من الهوية</h4>
+                        <p class="text-secondary mb-0">نظام متقدم للتحقق من هوية المستخدمين لضمان الأمان.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-5 bg-white">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-primary">كيف تعمل المنصة؟</h2>
+                <p class="text-secondary">٣ خطوات بسيطة لبدء رحلتك</p>
+            </div>
+            <div class="row text-center position-relative">
+                <div class="col-md-4 mb-4">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <span class="fs-2 fw-bold">1</span>
+                    </div>
+                    <h4 class="fw-bold">سجّل حسابك</h4>
+                    <p class="text-secondary">قم بإنشاء حساب كمالك أو مستأجر وارفع مستنداتك للتحقق.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="bg-accent text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <span class="fs-2 fw-bold">2</span>
+                    </div>
+                    <h4 class="fw-bold">انشر عقارك / ابحث</h4>
+                    <p class="text-secondary">أضف تفاصيل عقارك أو تصفح العقارات المتاحة للإيجار.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <span class="fs-2 fw-bold">3</span>
+                    </div>
+                    <h4 class="fw-bold">استأجر ووقع</h4>
+                    <p class="text-secondary">اتفق على الشروط ووقع العقد إلكترونياً وابدأ الدفع.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-primary">آراء عملائنا</h2>
+            </div>
+            <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner text-center w-75 mx-auto">
+                    <div class="carousel-item active">
+                        <div class="card border-0 bg-white p-5 shadow-sm">
+                            <p class="fs-5 text-secondary fst-italic">"المنصة وفرت علي الكثير من الوقت والجهد في توثيق العقود مع المستأجرين. تجربة ممتازة!"</p>
+                            <h5 class="fw-bold mt-4 text-primary">أحمد محمود</h5>
+                            <span class="text-muted">مالك عقار</span>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card border-0 bg-white p-5 shadow-sm">
+                            <p class="fs-5 text-secondary fst-italic">"دفع الإيجار أصبح أسهل من أي وقت مضى، والتطبيق آمن وسريع جداً."</p>
+                            <h5 class="fw-bold mt-4 text-primary">سارة علي</h5>
+                            <span class="text-muted">مستأجرة</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-primary rounded-circle p-2" aria-hidden="true"></span>
+                    <span class="visually-hidden">السابق</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-primary rounded-circle p-2" aria-hidden="true"></span>
+                    <span class="visually-hidden">التالي</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-4 border-top">
+        <div class="container text-center">
+            <p class="mb-0 text-secondary">&copy; 2026 العقار الذكي. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+        $(document).ready(function() {
+            $('#theme-toggle').on('click', function() {
+                const html = $('html');
+                const currentTheme = html.attr('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                html.attr('data-theme', newTheme);
+                $(this).find('i').toggleClass('bi-moon-fill bi-sun-fill');
+            });
+        });
+    </script>
+</body>
+</html>

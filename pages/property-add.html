@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة عقار جديد | العقار الذكي</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/rtl-overrides.css">
+    
+    <style>
+        .step-content { display: none; }
+        .step-content.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .upload-zone {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            background-color: var(--bg-color);
+            position: relative;
+        }
+        .upload-zone:hover { border-color: var(--primary-color); }
+        .upload-zone input[type="file"] { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+        
+        .photo-preview-item {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .photo-preview-item img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+        }
+        .photo-preview-item .remove-btn {
+            position: absolute; top: 5px; right: 5px;
+            background: rgba(239, 68, 68, 0.9); color: white;
+            border: none; border-radius: 50%;
+            width: 24px; height: 24px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="dashboard-owner.html">
+                <i class="bi bi-building me-2 text-primary"></i> لوحة تحكم المالك
+            </a>
+            <div class="d-flex ms-auto">
+                <a href="dashboard-owner.html" class="btn btn-outline-secondary btn-sm">إلغاء والعودة</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                
+                <h3 class="fw-bold mb-4">إضافة عقار جديد</h3>
+
+                <div class="card p-4 p-md-5 border-0 shadow-sm mb-4">
+                    <!-- Progress Bar -->
+                    <div class="position-relative mb-5">
+                        <div class="progress" style="height: 4px;">
+                            <div class="progress-bar bg-primary" id="addPropProgress" style="width: 20%;"></div>
+                        </div>
+                        <div class="d-flex justify-content-between position-absolute top-0 w-100" style="margin-top: -12px;">
+                            <span class="step-indicator bg-primary text-white rounded-circle d-flex align-items-center justify-content-center active" style="width: 28px; height: 28px;" id="ind-1">1</span>
+                            <span class="step-indicator bg-light text-secondary border rounded-circle d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;" id="ind-2">2</span>
+                            <span class="step-indicator bg-light text-secondary border rounded-circle d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;" id="ind-3">3</span>
+                            <span class="step-indicator bg-light text-secondary border rounded-circle d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;" id="ind-4">4</span>
+                            <span class="step-indicator bg-light text-secondary border rounded-circle d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;" id="ind-5">5</span>
+                        </div>
+                    </div>
+
+                    <form id="addPropertyForm" novalidate>
+                        
+                        <!-- Step 1: Basic Info -->
+                        <div class="step-content active" id="step1">
+                            <h5 class="fw-bold mb-4">البيانات الأساسية</h5>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label">عنوان الإعلان (مثال: شقة فاخرة بالتجمع)</label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">نوع العقار</label>
+                                    <select class="form-select" required>
+                                        <option value="">اختر...</option>
+                                        <option value="apartment">شقة</option>
+                                        <option value="villa">فيلا</option>
+                                        <option value="office">مكتب</option>
+                                        <option value="shop">محل تجاري</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">المدينة</label>
+                                    <select class="form-select" required>
+                                        <option value="">اختر...</option>
+                                        <option value="cairo">القاهرة</option>
+                                        <option value="giza">الجيزة</option>
+                                        <option value="alex">الإسكندرية</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">العنوان التفصيلي</label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end mt-4">
+                                <button type="button" class="btn btn-primary px-4 btn-next" data-next="2">التالي <i class="bi bi-chevron-left ms-2"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Details -->
+                        <div class="step-content" id="step2">
+                            <h5 class="fw-bold mb-4">تفاصيل العقار</h5>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">المساحة (م²)</label>
+                                    <input type="number" class="form-control" required min="10">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">عدد الغرف</label>
+                                    <input type="number" class="form-control" required min="0">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">الطابق</label>
+                                    <input type="number" class="form-control" required>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="isFurnished">
+                                        <label class="form-check-label fw-bold" for="isFurnished">العقار مفروش</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <label class="form-label fw-bold mb-3">الكماليات والمرافق</label>
+                                    <div class="row g-2">
+                                        <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">تكييف</label></div></div>
+                                        <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">جراج</label></div></div>
+                                        <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">أمن</label></div></div>
+                                        <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">مصعد</label></div></div>
+                                        <div class="col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">إنترنت</label></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="button" class="btn btn-outline-secondary px-4 btn-prev" data-prev="1">السابق</button>
+                                <button type="button" class="btn btn-primary px-4 btn-next" data-next="3">التالي <i class="bi bi-chevron-left ms-2"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Photos -->
+                        <div class="step-content" id="step3">
+                            <h5 class="fw-bold mb-4">الصور</h5>
+                            <p class="text-secondary mb-4">ارفع حتى ٢٠ صورة للعقار. الصور الواضحة تزيد من فرص التأجير.</p>
+                            
+                            <div class="upload-zone mb-4" id="photoDropzone">
+                                <input type="file" id="photosInput" accept="image/*" multiple required>
+                                <i class="bi bi-images fs-1 text-primary mb-2 d-block"></i>
+                                <span class="text-primary fw-bold">اختر الصور أو اسحبها هنا</span>
+                            </div>
+                            
+                            <div class="row g-2" id="photosPreviewGrid">
+                                <!-- Thumbnails injected here -->
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="button" class="btn btn-outline-secondary px-4 btn-prev" data-prev="2">السابق</button>
+                                <button type="button" class="btn btn-primary px-4 btn-next" data-next="4">التالي <i class="bi bi-chevron-left ms-2"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Video -->
+                        <div class="step-content" id="step4">
+                            <h5 class="fw-bold mb-4">جولة فيديو (اختياري)</h5>
+                            <p class="text-secondary mb-4">ارفع فيديو قصير (بحد أقصى ١٠٠ ميجابايت) لجولة داخل العقار.</p>
+                            
+                            <div class="upload-zone mb-3">
+                                <input type="file" id="videoInput" accept="video/mp4,video/x-m4v,video/*">
+                                <i class="bi bi-camera-video fs-1 text-primary mb-2 d-block"></i>
+                                <span class="text-primary fw-bold">ارفع فيديو</span>
+                            </div>
+                            
+                            <div id="videoProgressContainer" class="d-none">
+                                <span class="small text-secondary mb-1 d-block" id="videoUploadText">جاري الرفع...</span>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" id="videoProgressBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="button" class="btn btn-outline-secondary px-4 btn-prev" data-prev="3">السابق</button>
+                                <button type="button" class="btn btn-primary px-4 btn-next" data-next="5">التالي <i class="bi bi-chevron-left ms-2"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Docs & Pricing -->
+                        <div class="step-content" id="step5">
+                            <h5 class="fw-bold mb-4">إثبات الملكية والتسعير</h5>
+                            <p class="text-secondary mb-4">هذه المستندات ستكون مرئية للإدارة فقط للتحقق من الملكية ولن تظهر للمستأجرين.</p>
+                            
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">عقد الملكية أو إيصال مرافق حديث</label>
+                                <input type="file" class="form-control" accept=".pdf,image/*" required>
+                            </div>
+
+                            <h5 class="fw-bold mt-5 mb-3 border-top pt-4">شروط التأجير</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">قيمة الإيجار الشهري (ج.م)</label>
+                                    <input type="number" class="form-control" required min="100">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">مبلغ التأمين (ج.م)</label>
+                                    <input type="number" class="form-control" required min="0">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">الحد الأدنى لمدة الإيجار</label>
+                                    <select class="form-select" required>
+                                        <option value="6">٦ أشهر</option>
+                                        <option value="12" selected>سنة</option>
+                                        <option value="24">سنتان</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-5 border-top pt-4">
+                                <button type="button" class="btn btn-outline-secondary px-4 btn-prev" data-prev="4">السابق</button>
+                                <button type="submit" class="btn btn-success px-5 btn-lg" id="submitPropBtn">
+                                    <span class="spinner-border spinner-border-sm d-none me-2" id="propSpinner"></span>
+                                    نشر العقار
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script type="module" src="../assets/js/utils.js"></script>
+    <script type="module" src="../assets/js/property-add.js"></script>
+</body>
+</html>

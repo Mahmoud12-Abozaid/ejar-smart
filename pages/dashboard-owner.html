@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم المالك | العقار الذكي</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/rtl-overrides.css">
+    
+    <style>
+        .dashboard-container { display: flex; min-height: 100vh; }
+        .sidebar { width: 280px; flex-shrink: 0; padding-top: 2rem; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+        .main-content { flex-grow: 1; padding: 2rem; background-color: var(--bg-color); min-width: 0; }
+        
+        .stat-card { transition: transform 0.2s; }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        
+        @media (max-width: 991px) {
+            .dashboard-container { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: static; padding: 1rem; border-left: none; border-bottom: 1px solid var(--border-color); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navbar (Mobile only toggle mostly) -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm d-lg-none px-3">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <i class="bi bi-building me-2 text-primary"></i> العقار الذكي
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <div class="dashboard-container">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar bg-white border-start collapse d-lg-block" id="sidebarMenu">
+            <div class="px-4 mb-4 d-none d-lg-block">
+                <a href="index.html" class="text-decoration-none d-flex align-items-center">
+                    <i class="bi bi-building me-2 text-primary fs-4"></i>
+                    <h5 class="fw-bold text-primary mb-0">العقار الذكي</h5>
+                </a>
+            </div>
+            
+            <div class="px-4 mb-4 text-center border-bottom pb-4">
+                <img src="https://ui-avatars.com/api/?name=أحمد+محمود&background=1a4fa0&color=fff" class="rounded-circle mb-2" width="60" alt="Avatar">
+                <h6 class="fw-bold mb-0">أحمد محمود</h6>
+                <small class="text-secondary">مالك</small>
+            </div>
+
+            <nav class="nav flex-column px-3 gap-1">
+                <a class="nav-link active" href="dashboard-owner.html">
+                    <i class="bi bi-grid sidebar-link-icon"></i> لوحة التحكم
+                </a>
+                <a class="nav-link text-secondary" href="property-listing.html"> <!-- Usually a separate page but linking to listing for now -->
+                    <i class="bi bi-houses sidebar-link-icon"></i> عقاراتي
+                </a>
+                <a class="nav-link text-secondary" href="contract-view.html">
+                    <i class="bi bi-file-earmark-text sidebar-link-icon"></i> العقود
+                </a>
+                <a class="nav-link text-secondary" href="payments.html">
+                    <i class="bi bi-credit-card sidebar-link-icon"></i> المدفوعات
+                </a>
+                <a class="nav-link text-secondary" href="notifications.html">
+                    <i class="bi bi-bell sidebar-link-icon"></i> الإشعارات
+                </a>
+                <hr class="my-2 border-secondary opacity-25">
+                <a class="nav-link text-secondary" href="#">
+                    <i class="bi bi-gear sidebar-link-icon"></i> الإعدادات
+                </a>
+                <a class="nav-link text-danger mt-3" href="login.html">
+                    <i class="bi bi-box-arrow-right sidebar-link-icon"></i> تسجيل الخروج
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+                <div>
+                    <h3 class="fw-bold mb-1">مرحباً، أحمد 👋</h3>
+                    <p class="text-secondary mb-0">إليك ملخص أداء عقاراتك اليوم.</p>
+                </div>
+                <div>
+                    <a href="property-add.html" class="btn btn-primary"><i class="bi bi-plus-lg me-2"></i> إضافة عقار جديد</a>
+                </div>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="row g-4 mb-5">
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card stat-card border-0 shadow-sm p-4 h-100">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-secondary mb-1">عدد العقارات</p>
+                                <h3 class="fw-bold mb-0">١٢</h3>
+                            </div>
+                            <div class="stat-icon bg-primary bg-opacity-10 text-primary">
+                                <i class="bi bi-houses"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card stat-card border-0 shadow-sm p-4 h-100">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-secondary mb-1">عقود نشطة</p>
+                                <h3 class="fw-bold mb-0">٨</h3>
+                            </div>
+                            <div class="stat-icon bg-success bg-opacity-10 text-success">
+                                <i class="bi bi-file-earmark-check"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card stat-card border-0 shadow-sm p-4 h-100">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-secondary mb-1">إيراد الشهر</p>
+                                <h3 class="fw-bold mb-0 text-accent">١٢٥,٠٠٠ ج.م</h3>
+                            </div>
+                            <div class="stat-icon bg-accent bg-opacity-10 text-accent">
+                                <i class="bi bi-cash-coin"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card stat-card border-0 shadow-sm p-4 h-100">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-secondary mb-1">طلبات معلقة</p>
+                                <h3 class="fw-bold mb-0 text-danger">٣</h3>
+                            </div>
+                            <div class="stat-icon bg-danger bg-opacity-10 text-danger">
+                                <i class="bi bi-envelope-paper"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Chart -->
+                <div class="col-xl-8">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <h5 class="fw-bold mb-4">الإيرادات الشهرية</h5>
+                        <canvas id="revenueChart" height="100"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Notifications -->
+                <div class="col-xl-4">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0">أحدث الإشعارات</h5>
+                            <a href="notifications.html" class="text-decoration-none small">عرض الكل</a>
+                        </div>
+                        
+                        <div class="d-flex flex-column gap-3">
+                            <div class="d-flex align-items-start gap-3 p-2 rounded bg-light border-start border-primary border-4">
+                                <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="bi bi-file-earmark-plus"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1 fw-bold fs-6">طلب استئجار جديد</h6>
+                                    <p class="mb-0 text-secondary small">طلب جديد لشقة التجمع الخامس من "خالد محمد".</p>
+                                    <small class="text-muted mt-1 d-block">منذ ١٠ دقائق</small>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-start gap-3 p-2 rounded hover-bg">
+                                <div class="bg-success bg-opacity-10 text-success rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="bi bi-cash"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1 fw-bold fs-6">تم استلام الإيجار</h6>
+                                    <p class="mb-0 text-secondary small">تم تحويل إيجار فيلا مدينتي (٣٥,٠٠٠ ج.م).</p>
+                                    <small class="text-muted mt-1 d-block">أمس</small>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-start gap-3 p-2 rounded hover-bg">
+                                <div class="bg-warning bg-opacity-10 text-warning rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1 fw-bold fs-6">عقد يقترب من الانتهاء</h6>
+                                    <p class="mb-0 text-secondary small">عقد مكتب المعادي ينتهي بعد ١٤ يوماً.</p>
+                                    <small class="text-muted mt-1 d-block">منذ يومين</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Rentals Table -->
+                <div class="col-12 mt-5">
+                    <div class="card border-0 shadow-sm p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0">العقود النشطة</h5>
+                            <button class="btn btn-outline-primary btn-sm"><i class="bi bi-download me-1"></i> تصدير التقرير</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>المستأجر</th>
+                                        <th>العقار</th>
+                                        <th>القيمة الشهرية</th>
+                                        <th>تاريخ الانتهاء</th>
+                                        <th>الحالة</th>
+                                        <th>الإجراء</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <img src="https://ui-avatars.com/api/?name=سعيد+كامل&background=eee" class="rounded-circle" width="32">
+                                                <span class="fw-bold">سعيد كامل</span>
+                                            </div>
+                                        </td>
+                                        <td class="text-secondary">شقة التجمع الخامس</td>
+                                        <td class="fw-bold">١٥,٠٠٠ ج.م</td>
+                                        <td class="text-secondary">١٥ أكتوبر ٢٠٢٦</td>
+                                        <td><span class="badge badge-success px-2 py-1">ساري</span></td>
+                                        <td><button class="btn btn-sm btn-light"><i class="bi bi-three-dots-vertical"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <img src="https://ui-avatars.com/api/?name=منى+زكي&background=eee" class="rounded-circle" width="32">
+                                                <span class="fw-bold">منى زكي</span>
+                                            </div>
+                                        </td>
+                                        <td class="text-secondary">فيلا مدينتي</td>
+                                        <td class="fw-bold">٣٥,٠٠٠ ج.م</td>
+                                        <td class="text-secondary">١ نوفمبر ٢٠٢٦</td>
+                                        <td><span class="badge badge-success px-2 py-1">ساري</span></td>
+                                        <td><button class="btn btn-sm btn-light"><i class="bi bi-three-dots-vertical"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <img src="https://ui-avatars.com/api/?name=عمر+فاروق&background=eee" class="rounded-circle" width="32">
+                                                <span class="fw-bold">عمر فاروق</span>
+                                            </div>
+                                        </td>
+                                        <td class="text-secondary">مكتب المعادي</td>
+                                        <td class="fw-bold">٢٢,٠٠٠ ج.م</td>
+                                        <td class="text-secondary text-danger fw-bold">١٤ مايو ٢٠٢٦</td>
+                                        <td><span class="badge badge-warning px-2 py-1">ينتهي قريباً</span></td>
+                                        <td><button class="btn btn-sm btn-light"><i class="bi bi-three-dots-vertical"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script type="module" src="../assets/js/utils.js"></script>
+    <script type="module" src="../assets/js/dashboard-owner.js"></script>
+</body>
+</html>
